@@ -8,15 +8,15 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class TextFormTest {
     @BeforeAll
-     static void BeforeAll() {
+     static void beforeAll() {
         Configuration.browserSize = "920x920";
         Configuration.pageLoadStrategy = "eager";
         Configuration.baseUrl = "https://demoqa.com";
     }
 
     @Test
-    void FillFormTest() {
-        open("https://demoqa.com/automation-practice-form");
+    void fillFormTest() {
+        open("/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
         $("#firstName").setValue("Darya");
