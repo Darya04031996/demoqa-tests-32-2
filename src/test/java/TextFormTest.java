@@ -2,25 +2,23 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-
-import java.io.File;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class TextFormTest {
     @BeforeAll
-    static void beforeall() {
+     static void beforeAll() {
         Configuration.browserSize = "920x920";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.timeout = 5000; // default 4000
+        Configuration.baseUrl = "https://demoqa.com";
     }
 
     @Test
-    void fillformTest() {
+    void fillFormTest() {
         open("https://demoqa.com/automation-practice-form");
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
         $("#firstName").setValue("Darya");
         $("#lastName").setValue("Melgunova");
         $("#userEmail").setValue("darya.melgunova@gmail.com");
@@ -32,7 +30,7 @@ public class TextFormTest {
         $(".react-datepicker__day.react-datepicker__day--004").click();
         $("#subjectsInput").setValue("Computer Science").pressEnter();
         $("#hobbiesWrapper").$(byText("Music")).click();
-        $("#uploadPicture").uploadFile(new File("src/test/resources/380x240.jfif"));
+        $("#uploadPicture").uploadFromClasspath("380x240.jfif");
         $("#currentAddress").setValue("Street1");
         $("#react-select-3-input").setValue("NCR").pressEnter();
         $("#react-select-4-input").setValue("Delhi").pressEnter();
